@@ -121,7 +121,7 @@ for i in range(10):
         print("PDG ID:", MCParticles[j].PDG)
 
         # calculate the energy
-        energy = (MCParticles[j].momentum.x**2 + MCParticles[j].momentum.y**2 + MCParticles[j].momentum.z**2)**0.5 + MCParticles[j].mass**2
+        energy = (MCParticles[j].momentum.x**2 + MCParticles[j].momentum.y**2 + MCParticles[j].momentum.z**2 + MCParticles[j].mass**2)**0.5
         print("Energy:", energy)
 
         # if the particle has more than 10 GeV of energy, fill the histogram
