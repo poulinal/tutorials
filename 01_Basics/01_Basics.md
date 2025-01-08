@@ -326,8 +326,8 @@ print("1D histogram uncertanties", uncert_1D)
 For multidimensional histograms, the story is the same, we just have multiple axes that we can get information about. Note that the values of the histogram are now multidimensional, since we have information about each of the multiple axes. 
 
 ``` python
-edges_2D_axis0 = h1D.axes[0].edges
-edges_2D_axis1 = h1D.axes[1].edges
+edges_2D_axis0 = h2D.axes[0].edges
+edges_2D_axis1 = h2D.axes[1].edges
 counts_2D = h2D.values()
 uncert_2D = np.sqrt(h2D.variances())
 
