@@ -1,6 +1,6 @@
 # $Z\rightarrow\mu\mu$ Cross-Section at the Z-Pole
 
-In this tutorial, we will explore the fundamentals to measure the cross-section of the $Z \rightarrow \mu\mu$ process at the Z-pole. The analysis strategy and selection is based on previous measurements done at the CERN [Large Electron Positron collider (LEP)](https://en.wikipedia.org/wiki/Large_Electron%E2%80%93Positron_Collider). You can find more information in [this paper](https://link.springer.com/article/10.1007/s100520050001) about the measurement done by the [L3 Collaboration](https://en.wikipedia.org/wiki/L3_experiment), one of the 4 major experiments at LEP.
+In this tutorial, we will explore the fundamentals to measure the cross-section of the $Z \rightarrow \mu\mu$ process at the Z-pole. The analysis strategy and selection is based on previous measurements done at the CERN [Large Electron Positron collider (LEP)](https://en.wikipedia.org/wiki/Large_Electron%E2%80%93Positron_Collider). You can find more information in [this paper](https://arxiv.org/abs/hep-ex/0002046) about the measurement done by the [L3 Collaboration](https://en.wikipedia.org/wiki/L3_experiment), one of the 4 major experiments at LEP.
 
 
 
