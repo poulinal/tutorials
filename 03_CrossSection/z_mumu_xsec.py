@@ -2,7 +2,17 @@
 import ROOT
 ROOT.TH1.SetDefaultSumw2(ROOT.kTRUE)
 
+'''
+helpful shortcuts:
 
+fccanalysis run 03_CrossSection/z_mumu_xsec.py
+fccanalysis plots 03_CrossSection/plots_root.py
+python 03_CrossSection/plots_mpl4hep.py
+python 03_CrossSection/analysis.py --yields
+python 03_CrossSection/analysis.py --acceptance
+
+
+'''
 
 # list of all guns
 processList = {
@@ -21,15 +31,15 @@ includePaths = ["../functions/functions.h", "../functions/functions_gen.h"]
 
 
 # output directory
-outputDir   = "output/"
+outputDir   = "03_CrossSection/output/"
 
 
 # optional: ncpus, default is 4, -1 uses all cores available
 nCPUS       = 128
 
 # scale the histograms with the cross-section and integrated luminosity
-doScale = False
-intLumi = 1.0 # 44.84 pb-1 = LEP, 100e6=100 ab-1 = FCCee
+doScale = True
+intLumi = 44.84 # Integrated luminosity in pb     # 1.0 # 44.84 pb-1 = LEP, 100e6=100 ab-1 = FCCee
 
 # define histograms
 bins_p_mu = (200, 0, 200) # 1 GeV bins
@@ -109,6 +119,11 @@ def build_graph(df, dataset):
 
     df = df.Define("cut3", "3")
     hists.append(df.Histo1D(("cutFlow", "", *bins_count), "cut3"))
+    
+    ########
+    ##### Cut 3.5: get the momentum distribution of each muon separately, before the 4th cut.
+    ########
+    #muons_all_p
 
 
     #########

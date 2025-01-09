@@ -8,8 +8,9 @@ energy         = 91.2
 collider       = 'FCC-ee'
 formats        = ['png','pdf']
 
-outdir         = '/home/submit/jaeyserm/public_html/fccee/tutorials/z_mumu_xsec/'
-inputDir       = './output/' 
+#outdir         = '/home/submit/jaeyserm/public_html/fccee/tutorials/z_mumu_xsec/'
+outdir         = '03_CrossSection/z_mumu_xsec/'
+inputDir       = '03_CrossSection/output' 
 
 plotStatUnc    = False
 

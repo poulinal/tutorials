@@ -5,7 +5,7 @@ import argparse
 
 
 def get_hist(proc, hName, norm=False, lumi=150e6):
-    with uproot.open(f"output/{proc}.root") as f:
+    with uproot.open(f"03_CrossSection/output/{proc}.root") as f:
         hist = f[hName].to_numpy() # tuple (hist vals, hist edges)
         xsec = f["crossSection"].value
         nevents = f["eventsProcessed"].value

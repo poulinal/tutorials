@@ -13,9 +13,10 @@ def plot_invariant_mass():
 
     hists = []
     for i,proc in enumerate(procs):
-        file = uproot.open(f"output/{proc}.root")
+        file = uproot.open(f"./03_CrossSection/output/{proc}.root")
         #print(file.keys())
         h = file["invariant_mass"]
+        #h = file["muon_max_p_norm"]
         h = h.to_hist()
         #print(h)
         hists.append(h)
@@ -40,8 +41,43 @@ def plot_invariant_mass():
 
     hep.label.exp_label(exp="FCC-ee", ax=ax, data=False, rlabel="100 $\mathrm{ab^{-1}}$ (91.2 GeV)")
 
-    fig.savefig(f"{outDir}/invariant_mass_mpl4hep.png", bbox_inches="tight")
     fig.savefig(f"{outDir}/invariant_mass_mpl4hep.pdf", bbox_inches="tight")
+    
+def plot_muon_max_p_norm():
+    fig = plt.figure()
+    ax = fig.subplots()
+
+    hists = []
+    for i,proc in enumerate(procs):
+        file = uproot.open(f"./03_CrossSection/output/{proc}.root")
+        #print(file.keys())
+        #h = file["invariant_mass"]
+        h = file["muon_max_p_norm"]
+        h = h.to_hist()
+        #print(h)
+        hists.append(h)
+
+
+    hep.histplot(
+        hists,
+        stack=True,
+        histtype="fill",
+        color=["#7FBF7F", "#7F7FFF", "w"],
+        edgecolor=["k", "k", "r"],
+        linewidth=1,
+        label=labels,
+        ax=ax,
+    )
+
+    ax.set_ylabel("Events")
+    ax.set_xlim([0, 120])
+    ax.legend(loc='upper left', fontsize='x-small')
+    ax.set_yscale("log")
+    ax.set_xlabel("Muon max p norm (GeV)")
+
+    hep.label.exp_label(exp="FCC-ee", ax=ax, data=False, rlabel="100 $\mathrm{ab^{-1}}$ (91.2 GeV)")
+
+    fig.savefig(f"{outDir}/muon_max_p_norm_mpl4hep.pdf", bbox_inches="tight")
 
 
 def plot_cutflow():
@@ -52,7 +88,7 @@ def plot_cutflow():
 
     hists = []
     for i,proc in enumerate(procs):
-        file = uproot.open(f"output/{proc}.root")
+        file = uproot.open(f"03_CrossSection/output/{proc}.root")
         #print(file.keys())
         h = file["cutFlow"]
         h = h.to_hist()
@@ -88,9 +124,11 @@ def plot_cutflow():
 
 if __name__ == "__main__":
 
-    outDir = "/home/submit/jaeyserm/public_html/fccee/tutorials/z_mumu_xsec/"
+    #outDir = "/home/submit/jaeyserm/public_html/fccee/tutorials/z_mumu_xsec/"
+    outDir         = '03_CrossSection/z_mumu_xsec_mpl/'
     procs = ["p8_ee_gaga_mumu_ecm91p2", "wzp6_ee_tautau_ecm91p2", "wzp6_ee_mumu_ecm91p2"]
     labels = ["$e^+e^-\\to e^+e^-qq$", "$e^+e^-\\to\\tau^+\\tau^-$", "$e^+e^-\\to\mu^+\mu^-$"]
 
     plot_invariant_mass()
+    plot_muon_max_p_norm()
     plot_cutflow()
