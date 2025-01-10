@@ -40,6 +40,7 @@ nCPUS       = 128
 # scale the histograms with the cross-section and integrated luminosity
 doScale = True
 intLumi = 44.84 # Integrated luminosity in pb     # 1.0 # 44.84 pb-1 = LEP, 100e6=100 ab-1 = FCCee
+#intLumi = 100e6
 
 # define histograms
 bins_p_mu = (200, 0, 200) # 1 GeV bins
@@ -119,11 +120,6 @@ def build_graph(df, dataset):
 
     df = df.Define("cut3", "3")
     hists.append(df.Histo1D(("cutFlow", "", *bins_count), "cut3"))
-    
-    ########
-    ##### Cut 3.5: get the momentum distribution of each muon separately, before the 4th cut.
-    ########
-    #muons_all_p
 
 
     #########
@@ -136,6 +132,7 @@ def build_graph(df, dataset):
 
     df = df.Define("cut4", "4")
     hists.append(df.Histo1D(("cutFlow", "", *bins_count), "cut4"))
+    hists.append(df.Histo1D(("4thCut", "", *bins_p_mu), "cut4"))
 
 
     ############################################################################
@@ -147,7 +144,14 @@ def build_graph(df, dataset):
     df = df.Define("leps_tlv", "FCCAnalyses::makeLorentzVectors(muons)")
     df = df.Define("invariant_mass", "(leps_tlv[0]+leps_tlv[1]).M()")
     hists.append(df.Histo1D(("invariant_mass", "", *bins_m_ll), "invariant_mass"))
+    
 
+
+    ############################################################################
+    ### get all muons P
+    #################
+    df = df.Define("muon_p", "FCCAnalyses::ReconstructedParticle::get_p(muons)")
+    hists.append(df.Histo1D(("muon_p", "", *bins_p_mu), "muon_p"))
 
 
     return hists, weightsum
