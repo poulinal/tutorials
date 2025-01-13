@@ -125,7 +125,11 @@ def build_graph(df, dataset):
     #########
     ### CUT 4: max normalized muon momentum > 0.6
     #########
-    df = df.Define("muon_max_p", "(muons_p[0] > muons_p[1]) ? muons_p[0] : muons_p[1]")
+    df = df.Define("muon_max_p", "(muons_p[0] > muons_p[1]) ? muons_p[0] : muons_p[1]") 
+    #describe what this does: if the first muon has a higher momentum than the second muon, 
+    # then the first muon's momentum is the max momentum, 
+    # otherwise the second muon's momentum is the max momentum
+    
     df = df.Define("muon_max_p_norm", "muon_max_p/45.6")
     hists.append(df.Histo1D(("muon_max_p_norm", "", *bins_norm), "muon_max_p_norm"))
     df = df.Filter("muon_max_p_norm > 0.6")
@@ -150,8 +154,26 @@ def build_graph(df, dataset):
     ############################################################################
     ### get all muons P
     #################
-    df = df.Define("muon_p", "FCCAnalyses::ReconstructedParticle::get_p(muons)")
-    hists.append(df.Histo1D(("muon_p", "", *bins_p_mu), "muon_p"))
+    #set df to muon_p
+    df = df.Define("allmuon_p", "muons_p")
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    #df = df.Define("allmuon_p", "FCCAnalyses::ReconstructedParticle::get_p(muons)")
+    #df = df.Filter("muons_no == 2 && (muons_q[0] + muons_q[1]) == 0")
+    #df = df.Filter("muons_q < 0")
+    df = df.Define("posmuon_p", "5")
+    #need to seperate
+    hists.append(df.Histo1D(("posmuon_p", "", *bins_p_mu), "posmuon_p"))
+    
+    
+
 
 
     return hists, weightsum
